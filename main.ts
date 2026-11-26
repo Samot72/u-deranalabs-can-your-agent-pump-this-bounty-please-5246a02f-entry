@@ -24,6 +24,12 @@ function validate(text: string): void {
   if (text.trim().length === 0) {
     throw new Error("entry is only whitespace");
   }
+  if (text !== text.trim()) {
+    throw new Error("entry must not have leading or trailing whitespace");
+  }
+  if (/\s{2,}/.test(text)) {
+    throw new Error("entry must not contain doubled whitespace");
+  }
   if (text.includes("\n") || text.includes("\r")) {
     throw new Error("entry must be a single line");
   }
